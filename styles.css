@@ -1,0 +1,57 @@
+body {
+    font-family: CrimsonPro, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #121212;
+    color: #ffffff;
+}
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 3; 
+    color: #00ffcc;
+}
+.content {
+    width: 800px;
+    margin: auto;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+}
+img {
+    margin: auto;
+    width: 800px;
+    border-radius: 8px;
+}
+h2 {
+    color: #00ccff;
+    margin-top: 20px;
+}
+p {
+    line-height: 1.6;
+}
+.price {
+    font-size: 30; 
+    color: #ffcc00; 
+    text-align: right; 
+    margin: 10px 0; 
+}
+.specs {
+    background: #333333;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.specs ul {
+    list-style: none;
+    padding: 0;
+}
+.specs li {
+    padding: 5px 0;
+}
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
