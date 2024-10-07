@@ -1,84 +1,85 @@
+
 body {
     font-family: 'Georgia', serif;
-    background-color: #f9f3f3;
-    color: #3a3a3a;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    background-color: #f9f4f7; 
+    color: #333; 
 }
 
 header {
+    background: #f5d6e8; 
+    color: #333;
+    padding: 20px 0;
     text-align: center;
-    background-color: #ffebee;
-    padding: 20px;
-    border-radius: 10px;
+    border-bottom: 2px solid #f1c3d6; 
 }
 
 h1 {
-    font-size: 2.5em;
-    color: #d81b60;
+    margin: 0;
+    font-family: 'Playfair Display', serif; 
+    font-size: 2.5em; 
 }
 
 h2 {
-    color: #c2185b;
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    color: #d96a8c; 
 }
 
-.about, .projects {
-    margin: 20px 0;
+p {
+    font-size: 1.1em;
+}
+
+main {
     padding: 20px;
-    background: #fff0f5;
-    border-radius: 10px;
 }
 
-a {
-    color: #d81b60;
-    text-decoration: none;
+.creations {
+    margin-top: 20px;
 }
 
-a:hover {
-    text-decoration: underline;
+.creation-buttons {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    gap: 10px;               
+    flex-wrap: wrap;        
+    padding: 15px;
+}
+
+.creation-buttons a {
+    flex: 1 1 18%; 
+    text-align: center;
+}
+
+.creation-buttons a button {
+    background-color: #d96a8c; 
+    color: white; 
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    width: 100%; 
+}
+
+.creation-buttons a button:hover {
+    background-color: #c05778; 
+}
+
+.about {
+    margin-top: 20px;
 }
 
 footer {
     text-align: center;
-    margin-top: 40px;
-}
-
-.creations ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.creations {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    max-width: 900px;
-    margin: 0 auto; 
-}
-
-.creations ul {
-    padding: 0;
-}
-
-.creations li {
-    display: inline-block; 
-    width: 150px; /* Fixed width for each project */
-    height: 60px; /* Adjust height for better alignment */
-    margin: 10px; /* Margin for spacing */
-    background-color: #fff;
-    border: 2px solid #d81b60;
-    border-radius: 10px;
-    text-align: center;
-    line-height: 60px; /* Center text vertically */
-}
-
-.creations a {
-    display: block;
+    padding: 10px 0;
+    background: #f5d6e8; 
+    color: #333;
+    position: relative;
+    bottom: 0;
     width: 100%;
-    height: 100%;
-    line-height: 60px; /* Match the height of the li */
-    color: #d81b60;
 }
-
-
-
