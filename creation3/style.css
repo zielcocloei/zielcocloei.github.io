@@ -1,6 +1,6 @@
-*body {
-    font-family: 'Playfair Display SC', sans-serif;
 
+*body {
+    font-family: Arial, sans-serif;
 }
 
 body {
@@ -28,20 +28,22 @@ body {
 
 body {
     font-family: Arial, sans-serif;
+    
 }
-
 .navbar {
-    height: 48px;
-    padding: 10px 20px;
-
+    height: 48px; 
+    padding: 10px 20px; 
+ 
 }
+
+
 
 .navbar-nav a {
     font-size: 15px;
     text-transform: uppercase;
     font-weight: 500;
 }
-
+   
 
 .navbar-brand {
     font-size: 24px;
@@ -58,16 +60,6 @@ body {
 
 
 
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-
-}
-
-.navbar.dark-mode {
-    background-color: #1e1e1e;
-
-}
 
 
 
@@ -85,13 +77,13 @@ body.dark-mode {
 .hidden {
     display: none;
 }
-
 h2 {
-    font-family: 'Playfair Display SC', sans-serif;
+    font-family: "Pacifico", cursive;
     font-size: 2.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #1c3b57;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
 }
 
@@ -116,7 +108,7 @@ h2 {
 .gallery-item img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+ object-fit: cover;
     border-radius: 8px;
 }
 
@@ -138,5 +130,5 @@ h2 {
 
 .row>div {
     margin-bottom: 20px;
-
+    
 }
