@@ -7,9 +7,30 @@
     <title>Art Gallery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
 
+        .navbar.dark-mode {
+            background-color: #333;
+        }
+
+        .btn-dark-mode {
+            background-color: #555;
+            color: white;
+        }
+
+        .btn-dark-mode:hover {
+            background-color: #777;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,10 +59,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="showSection('cinemas')">Cinemas</a>
                     </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-secondary" onclick="changeMode()">Toggle Dark Mode</button>
-                    </li>
                 </ul>
+                <button id="themeToggle" class="btn btn-secondary ms-3" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
             </div>
         </div>
     </nav>
@@ -68,35 +87,32 @@
         <button class="carousel-control-prev" type="button" data-bs-target="#home" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#home" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#home" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
     <!-- Paintings Gallery Section -->
     <div id="paintings" class="container mt-5 hidden">
         <h2 class="text-center">Paintings </h2>
         <div class="row" id="paintingsGallery"></div>
-        <button id="seeMorePaintings" class="btn btn-primary" onclick="toggleGallery('paintings', this)">See
-            More</button>
+        <button id="seeMorePaintings" class="btn btn-primary" onclick="toggleGallery('paintings', this)">See More</button>
     </div>
 
     <!-- Architectures Gallery Section -->
     <div id="architectures" class="container mt-5 hidden">
         <h2 class="text-center">Architectures</h2>
         <div class="row" id="architecturesGallery"></div>
-        <button id="seeMoreArchitectures" class="btn btn-primary" onclick="toggleGallery('architectures', this)">See
-            More</button>
+        <button id="seeMoreArchitectures" class="btn btn-primary" onclick="toggleGallery('architectures', this)">See More</button>
     </div>
 
     <!-- Sculptures Gallery Section -->
     <div id="sculptures" class="container mt-5 hidden">
         <h2 class="text-center">Sculptures</h2>
         <div class="row" id="sculpturesGallery"></div>
-        <button id="seeMoreSculptures" class="btn btn-primary" onclick="toggleGallery('sculptures', this)">See
-            More</button>
+        <button id="seeMoreSculptures" class="btn btn-primary" onclick="toggleGallery('sculptures', this)">See More</button>
     </div>
 
     <!-- Cinemas Gallery Section -->
@@ -107,12 +123,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9GkcIdslK1eN7N6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous">
-        </script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         const paintings = [
-            { title: "Water Lilies", artist: "Claude Monet", imgSrc: "images/paintings/Water Lilies.jpg", description: "A series of impressionist paintings depicting Monet's flower garden, showcasing the effects of light on water." },
+        { title: "Water Lilies", artist: "Claude Monet", imgSrc: "images/paintings/Water Lilies.jpg", description: "A series of impressionist paintings depicting Monet's flower garden, showcasing the effects of light on water." },
             { title: "Gloucester Harbor", artist: "Winslow Homer", imgSrc: "images/paintings/Gloucester.jpg", description: "A serene coastal scene capturing the beauty of Gloucester Harbor, reflecting Homer's mastery of water and light." },
             { title: "Looking Down Yosemite Valley", artist: "Albert Bierstadt", imgSrc: "images/paintings/Looking.jpg", description: "A dramatic landscape painting showcasing the grandeur of Yosemite Valley, highlighting Bierstadt's attention to detail and light." },
             { title: "Road Near Mont Sainte-Victoire", artist: "Paul Cézanne", imgSrc: "images/paintings/Road.jpg", description: "A landscape painting featuring the iconic Mont Sainte-Victoire, demonstrating Cézanne's unique approach to form and color." },
@@ -120,14 +134,12 @@
             { title: "The Persistence of Memory", artist: "Salvador Dalí", imgSrc: "images/paintings/The-Persistence-of-Memory.jpg", description: "A surrealistic painting featuring melting clocks, symbolizing the fluidity of time." },
             { title: "The Last Supper", artist: "Leonardo da Vinci", imgSrc: "images/paintings/The Last Supper.jpg", description: "A mural depicting Jesus and his disciples during the final meal, capturing a moment of intense emotion." },
             { title: "The Birth of Venus", artist: "Sandro Botticelli", imgSrc: "images/paintings/The Birth of Venus.jpg", description: "A mythological painting depicting the goddess Venus emerging from the sea, symbolizing beauty and love." },
-            { title: "The Creation of Adam", artist: " Michelangelo", imgSrc: "images/paintings/The Creation of Adam.jpg", description: "A fresco from the Sistine Chapel illustrating the Biblical creation narrative, highlighting human connection with God." },
+            { title: "The Creation of Adam", artist: "Michelangelo", imgSrc: "images/paintings/The Creation of Adam.jpg", description: "A fresco from the Sistine Chapel illustrating the Biblical creation narrative, highlighting human connection with God." },
             { title: "Guernica", artist: "Pablo Picasso", imgSrc: "images/paintings/Guernica.jpg", description: "A powerful political statement, this mural-sized painting depicts the horrors of war and the suffering it inflicts on individuals, symbolizing the impact of the bombing of Guernica during the Spanish Civil War." }
-
         ];
 
-        // Data for Architectures
         const architectures = [
-            { title: "Eiffel Tower", architect: "Gustave Eiffel", imgSrc: "images/architectures/Eiffel Tower.jpg", description: "An iron lattice tower in Paris, symbolizing French art and culture." },
+        { title: "Eiffel Tower", architect: "Gustave Eiffel", imgSrc: "images/architectures/Eiffel Tower.jpg", description: "An iron lattice tower in Paris, symbolizing French art and culture." },
             { title: "Sydney Opera House", architect: "Jørn Utzon", imgSrc: "images/architectures/Sydney Opera House.jpg", description: "A multi-venue performing arts center known for its unique shell-like design." },
             { title: "Taj Mahal", architect: "Ustad Ahmad Lahori", imgSrc: "images/architectures/Taj Mahal.jpg", description: "A mausoleum in India, admired for its beauty and intricate craftsmanship." },
             { title: "Colosseum", architect: "Unknown", imgSrc: "images/architectures/Colosseum.jpg", description: "An ancient amphitheater in Rome, representing Roman engineering and history." },
@@ -140,9 +152,8 @@
 
         ];
 
-        // Data for Sculptures
         const sculptures = [
-            { title: "David", artist: "Michelangelo", imgSrc: "images/sculptures/David.jpg", description: "A Renaissance masterpiece representing the biblical hero David, renowned for its detailed anatomy." },
+        { title: "David", artist: "Michelangelo", imgSrc: "images/sculptures/David.jpg", description: "A Renaissance masterpiece representing the biblical hero David, renowned for its detailed anatomy." },
             { title: "Christ the Redeemer", artist: "Paul Landowski", imgSrc: "images/sculptures/Christ the Redeemer.jpg", description: "A colossal statue of Jesus Christ in Rio de Janeiro, Brazil, symbolizing peace and welcoming to visitors." },
             { title: "The Gates of Hell", artist: "Auguste Rodin", imgSrc: "images/sculptures/Gates of Hell.jpg", description: "An iconic sculptural group depicting scenes from Dante's 'Inferno,' showcasing Rodin's mastery of form and emotion." },
             { title: "Nike of Samothrace", artist: "Unknown", imgSrc: "images/sculptures/Nike of Samothrace.jpg", description: "A Hellenistic sculpture representing the goddess of victory, renowned for its dynamic pose and intricate drapery." },
@@ -153,11 +164,11 @@
             { title: "The Thinker", artist: "Auguste Rodin", imgSrc: "images/sculptures/The Thinker.jpg", description: "A bronze sculpture of a man deep in thought, often interpreted as a representation of philosophy and intellectual contemplation." },
             { title: "Venus de Milo", artist: "Alexandros of Antioch", imgSrc: "images/sculptures/Venus de Milo.jpg", description: "An ancient Greek statue representing the goddess of love and beauty, celebrated for its idealized form and missing arms, which add to its mystique." }
 
+
         ];
 
-        // Data for Cinemas
         const cinemas = [
-            { title: "Citizen Kane", director: "Orson Welles", imgSrc: "images/cinemas/Citizen Kane.jpg", description: "A drama about the life of a publishing tycoon, known for its innovative storytelling." },
+        { title: "Citizen Kane", director: "Orson Welles", imgSrc: "images/cinemas/Citizen Kane.jpg", description: "A drama about the life of a publishing tycoon, known for its innovative storytelling." },
             { title: "Casablanca", director: "Michael Curtiz", imgSrc: "images/cinemas/Casablanca.jpg", description: "A romantic drama set during World War II, celebrated for its iconic quotes and characters." },
             { title: "Pulp Fiction", director: "Quentin Tarantino", imgSrc: "images/cinemas/Pulp Fiction.jpg", description: "A neo-noir film known for its nonlinear narrative and eclectic dialogue." },
             { title: "The Godfather", director: "Francis Ford Coppola", imgSrc: "images/cinemas/The Godfather.jpg", description: "A crime film depicting the powerful Italian-American crime family of Don Vito Corleone." },
@@ -165,8 +176,9 @@
             { title: "La La Land", director: "Damien Chazelle", imgSrc: "images/cinemas/La La Land.jpg", description: "A romantic musical that follows the love story between an aspiring actress and a jazz musician in Los Angeles, exploring themes of dreams, love, and sacrifice." },
             { title: "The Shawshank Redemption", director: "Frank Darabont", imgSrc: "images/cinemas/The Shawshank Redemption.jpg", description: "A story of hope and friendship set in a prison, based on a novella by Stephen King." },
             { title: "The Dark Knight", director: "Christopher Nolan", imgSrc: "images/cinemas/The Dark Knight.jpg", description: "A superhero film that explores the struggle between Batman and the Joker." },
-            { title: "Forrest Gump", director: "Robert Z emeckis", imgSrc: "images/cinemas/Forrest Gump.jpg", description: "A drama-comedy following the life of a man with a low IQ who witnesses historical events." },
+            { title: "Forrest Gump", director: "Robert Zemeckis", imgSrc: "images/cinemas/Forrest Gump.jpg", description: "A drama-comedy following the life of a man with a low IQ who witnesses historical events." },
             { title: "The Matrix", director: "Lana and Lilly Wachowski", imgSrc: "images/cinemas/The Matrix.jpg", description: "A sci-fi film that questions reality and features groundbreaking visual effects." }
+   
         ];
 
         function showSection(section) {
@@ -180,14 +192,6 @@
             }
         }
 
-        function changeMode() {
-            const bodyElement = document.body;
-            bodyElement.classList.toggle("dark-mode");
-
-            const navbar = document.querySelector('.navbar');
-            navbar.classList.toggle("dark-mode");
-        }
-
         function displayGallery(gallery) {
             const items = {
                 paintings: paintings,
@@ -197,7 +201,7 @@
             };
 
             const galleryElement = document.getElementById(gallery + "Gallery");
-            galleryElement.innerHTML = "";
+            galleryElement.innerHTML = ""; 
             const visibleItems = items[gallery].slice(0, 4);
 
             visibleItems.forEach(item => {
@@ -206,55 +210,55 @@
                 col.innerHTML = `
                     <div class="gallery-item">
                         <img src="${item.imgSrc}" class="img-fluid" alt="${item.title}">
-                        <h5>${item.title}</h5>
+                        <h4>${item.title}</h4>
                         <p>${item.description}</p>
-                    </div>
-                `;
+                    </div>`;
                 galleryElement.appendChild(col);
             });
         }
 
-        function toggleGallery(gallery, button) {
+        function toggleGallery(section, button) {
             const items = {
                 paintings: paintings,
                 architectures: architectures,
                 sculptures: sculptures,
                 cinemas: cinemas
             };
+            const galleryElement = document.getElementById(section + "Gallery");
+            galleryElement.innerHTML = ""; // Clear previous items
 
-            const galleryElement = document.getElementById(gallery + "Gallery");
-            const currentItemsCount = galleryElement.childElementCount;
-
-            if (currentItemsCount < items[gallery].length) {
-                const nextItems = items[gallery].slice(currentItemsCount, currentItemsCount + 4);
-
-                nextItems.forEach(item => {
+            if (button.innerText === "See More") {
+                items[section].forEach(item => {
                     const col = document.createElement("div");
                     col.className = "col-md-3";
                     col.innerHTML = `
                         <div class="gallery-item">
                             <img src="${item.imgSrc}" class="img-fluid" alt="${item.title}">
-                            <h5>${item.title}</h5>
+                            <h4>${item.title}</h4>
                             <p>${item.description}</p>
-                        </div>
-                    `;
+                        </div>`;
                     galleryElement.appendChild(col);
                 });
-
-                if (galleryElement.childElementCount >= items[gallery].length) {
-                    button.innerText = "See Less";
-                }
+                button.innerText = "See Less";
             } else {
-
-                const itemsToRemove = 4;
-                for (let i = 0; i < itemsToRemove && galleryElement.lastChild; i++) {
-                    galleryElement.removeChild(galleryElement.lastChild);
-                }
+                displayGallery(section);
                 button.innerText = "See More";
             }
         }
 
-        showSection("home");
+      
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('nav').classList.toggle('dark-mode');
+            const button = document.getElementById('themeToggle');
+            if (document.body.classList.contains('dark-mode')) {
+                button.classList.add('btn-dark-mode');
+                button.innerText = 'Switch to Light Mode';
+            } else {
+                button.classList.remove('btn-dark-mode');
+                button.innerText = 'Switch to Dark Mode';
+            }
+        }
     </script>
 </body>
 
