@@ -49,7 +49,7 @@
         }
 
         .navbar-nav .nav-link.active {
-            color: #dd868c!important;
+            color: #dd868c !important;
         }
 
         .navbar-custom.toggled {
@@ -104,7 +104,7 @@
         }
 
         .list-group-item:hover {
-            background-color: #dd868c!important;
+            background-color: #dd868c !important;
         }
 
         .modal-backdrop {
@@ -252,32 +252,55 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="list-group">
-                        <a href="project1/index.html" target="_blank" class="list-group-item list-group-item-action my-2"
-                            style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px; ; transition: background-color 0.3s ease;">
+                    <div class="d-flex justify-content-center mb-3">
+                        <button class="btn btn-main me-2" id="showWebdev"
+                            style="background-color: #0c969c; color: #cbd1e0; border-radius: 20px; padding: 8px 20px;"
+                            onmouseover="this.style.backgroundColor='#9a9da1'; this.style.color='#172634';"
+                            onmouseout="this.style.backgroundColor='#0c969c'; this.style.color='#cbd1e0';">
+                            WEBDEV
+                        </button>
+                        <button class="btn btn-main" id="showAdet"
+                            style="background-color: #0c969c; color: #cbd1e0; border-radius: 20px; padding: 8px 20px;"
+                            onmouseover="this.style.backgroundColor='#9a9da1'; this.style.color='#172634';"
+                            onmouseout="this.style.backgroundColor='#0c969c'; this.style.color='#cbd1e0';">
+                            ADET
+                        </button>
+                    </div>
+                    <div id="webdevProjects" class="list-group" style="display: none;">
+                        <a href="project1/index.html" target="_blank"
+                            class="list-group-item list-group-item-action my-2"
+                            style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px; transition: background-color 0.3s ease;">
                             PRODUCT
                         </a>
-                        <a href="project2/index.html" target="_blank" class="list-group-item list-group-item-action my-2"
-                            style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px;  transition: background-color 0.3s ease;">
+                        <a href="project2/index.html" target="_blank"
+                            class="list-group-item list-group-item-action my-2"
+                            style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px; transition: background-color 0.3s ease;">
                             PLACE
                         </a>
-                        <a href="project3/index.html" target="_blank" class="list-group-item list-group-item-action my-2"
+                        <a href="project3/index.html" target="_blank"
+                            class="list-group-item list-group-item-action my-2"
                             style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px; transition: background-color 0.3s ease;">
                             GALLERY
                         </a>
-                        <a href="project4/index.html" target="_blank" class="list-group-item list-group-item-action my-2"
+                        <a href="project4/index.html" target="_blank"
+                            class="list-group-item list-group-item-action my-2"
                             style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px; transition: background-color 0.3s ease;">
                             API
                         </a>
-                        <a href="project5/index.html" target="_blank" class="list-group-item list-group-item-action my-2"
+                        <a href="project5/index.html" target="_blank"
+                            class="list-group-item list-group-item-action my-2"
                             style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px; transition: background-color 0.3s ease;">
                             PARALLAX
                         </a>
-                        <a href="project6/index.html" target="_blank" class="list-group-item list-group-item-action my-2"
+                        <a href="project6/index.html" target="_blank"
+                            class="list-group-item list-group-item-action my-2"
                             style="background-color: #0c969c; color: #cbd1e0; border-radius: 10px; transition: background-color 0.3s ease;">
                             VIDEO
                         </a>
-
+                    </div>
+                    <div id="adetProjects" class="list-group" style="display: none;">
+                        <!-- Add ADET projects here in the future -->
+                        <p style="color: #cbd1e0; text-align: center;">No ADET projects available yet.</p>
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 1px solid #a8bbcf;">
@@ -291,6 +314,7 @@
             </div>
         </div>
     </div>
+
 
     <section id="about" class="py-5" style="background-color: #0c969c;">
         <div class="container py-5">
@@ -366,6 +390,17 @@
 
         toggleButton.addEventListener('click', () => {
             navbar.classList.toggle('toggled');
+        });
+
+        // Project modal button toggle
+        document.getElementById('showWebdev').addEventListener('click', function () {
+            document.getElementById('webdevProjects').style.display = 'block';
+            document.getElementById('adetProjects').style.display = 'none';
+        });
+
+        document.getElementById('showAdet').addEventListener('click', function () {
+            document.getElementById('webdevProjects').style.display = 'none';
+            document.getElementById('adetProjects').style.display = 'block';
         });
         //navbar-scrolled background-color
         window.addEventListener('scroll', function () {
