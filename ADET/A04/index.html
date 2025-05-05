@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foreveryours Flowers POS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="Icon" type="image/png" href="assets/images/logo.png">
+  <style>
+    .modal-content pre {
+      white-space: pre-wrap;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+    }
+    .receipt-modal .modal-dialog {
+      max-width: 400px;
+    }
+    .maincontainer {
+      max-height: 600px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .maincontainer::-webkit-scrollbar {
+      width: 8px;
+    }
+    .maincontainer::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 4px;
+    }
+    .maincontainer::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .content-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .categories-section {
+      flex: 2;
+      min-width: 300px;
+    }
+    .receipt-section {
+      flex: 1;
+      min-width: 250px;
+      max-width: 350px;
+    }
+    .receipt {
+      position: sticky;
+      top: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .receipt::-webkit-scrollbar {
+      width: 8px;
+    }
+    .receipt::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 4px;
+    }
+    .receipt::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-left: 10px;
+      background: linear-gradient(90deg, #ff4500, #ffa500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      max-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid" style="margin-top: 20px;">
+    <div class="header">
+      <div class="logo-container">
+        <img src="assets/images/logo.png" alt="Foreveryours Flowers Logo" class="logo">
+        <h1 class="header-title">Foreveryours Flowers</h1>
+      </div>
+    </div>
+    <div class="container-fluid content-container">
+      <div class="categories-section">
+        <div class="p-0 mb-2">
+          <div class="categories" id="categories"></div>
+        </div>
+        <div class="card p-3 maincontainer" id="maincontainer"></div>
+      </div>
+      <div class="receipt-section">
+        <div class="card p-3 receipt">
+          <h5 id="bill-details">Receipt</h5>
+          <div id="receipt-items"></div>
+          <div class="mt-4">
+            <div class="receipt-item">
+              <span>SUBTOTAL</span>
+              <span id="subtotalValue">QAR 0.00</span>
+            </div>
+            <div class="receipt-item">
+              <span>TAX (5%)</span>
+              <span id="taxValue">QAR 0.00</span>
+            </div>
+            <div class="receipt-item">
+              <span><b>TOTAL</b></span>
+              <span><b id="totalValue">QAR 0.00</b></span>
+            </div>
+          </div>
+          <button class="proceed-transaction btn btn-primary" onclick="proceedTransaction()">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal fade receipt-modal" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="receiptModalLabel">Transaction Receipt</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <pre id="receiptContent"></pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="downloadReceipt()">Download Receipt</button>
+            <button type="button" class="btn btn-primary" onclick="window.print()">Print</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="products.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script>
+      let cart = [];
+      let selectedCategory = 'All';
+      let productQuantities = {};
+      let billNumber = 1000;
+
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof products === 'undefined') {
+          console.error('Products array is not defined. Check if products.js is loaded correctly.');
+          return;
+        }
+        productQuantities = products.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {});
+        loadCategories();
+        loadProducts();
+      });
+
+      function loadCategories() {
+        const categories = ['All', ...new Set(products.map(p => p.category))];
+        const categoryContainer = document.getElementById('categories');
+        categoryContainer.innerHTML = '';
+        categories.forEach(category => {
+          const button = document.createElement('button');
+          button.className = `category-btn ${category === selectedCategory ? 'active' : ''}`;
+          button.textContent = category;
+          button.onclick = () => {
+            selectedCategory = category;
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            loadProducts();
+          };
+          categoryContainer.appendChild(button);
+        });
+      }
+
+      function loadProducts() {
+        const productContainer = document.getElementById('maincontainer');
+        productContainer.innerHTML = '';
+        const filteredProducts = selectedCategory === 'All' ? products : products.filter(p => p.category === selectedCategory);
+        filteredProducts.forEach(product => {
+          const productCard = `
+            <div class="card product-card">
+              <img src="${product.image}" class="card-img-top" alt="${product.name}">
+              <div class="card-body">
+                <h6 class="card-title">${product.name}</h6>
+                <p class="card-text">QAR ${product.price.toFixed(2)}</p>
+                <div class="quantity-control">
+                  <button onclick="updateProductQuantity(${product.id}, -1)">−</button>
+                  <span id="quantity-${product.id}">${productQuantities[product.id]}</span>
+                  <button onclick="updateProductQuantity(${product.id}, 1)">+</button>
+                </div>
+                <button class="btn btn-add" onclick="addToCart(${product.id})">Add to Cart</button>
+              </div>
+            </div>
+          `;
+          productContainer.innerHTML += productCard;
+        });
+      }
+
+      function updateProductQuantity(productId, delta) {
+        productQuantities[productId] = Math.max(1, productQuantities[productId] + delta);
+        document.getElementById(`quantity-${productId}`).textContent = productQuantities[productId];
+      }
+
+      function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        const cartItem = cart.find(item => item.id === productId);
+        const quantity = productQuantities[productId];
+        if (cartItem) {
+          cartItem.quantity += quantity;
+        } else {
+          cart.push({ ...product, quantity });
+        }
+        productQuantities[productId] = 1;
+        loadProducts();
+        updateReceipt();
+      }
+
+      function updateCartQuantity(productId, delta) {
+        const cartItem = cart.find(item => item.id === productId);
+        if (cartItem) {
+          cartItem.quantity += delta;
+          if (cartItem.quantity <= 0) {
+            cart = cart.filter(item => item.id !== productId);
+          }
+          updateReceipt();
+        }
+      }
+
+      function updateReceipt() {
+        const receiptItems = document.getElementById('receipt-items');
+        const subtotalValue = document.getElementById('subtotalValue');
+        const taxValue = document.getElementById('taxValue');
+        const totalValue = document.getElementById('totalValue');
+
+        receiptItems.innerHTML = '';
+        let subtotal = 0;
+        cart.forEach(item => {
+          subtotal += item.price * item.quantity;
+          const itemElement = `
+            <div class="receipt-item">
+              <span>${item.name}</span>
+              <span>QAR ${(item.price * item.quantity).toFixed(2)}</span>
+              <div class="quantity-control">
+                <button onclick="updateCartQuantity(${item.id}, -1)">−</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+              </div>
+            </div>
+          `;
+          receiptItems.innerHTML += itemElement;
+        });
+
+        const tax = subtotal * 0.05;
+        const total = subtotal + tax;
+
+        subtotalValue.textContent = `QAR ${subtotal.toFixed(2)}`;
+        taxValue.textContent = `QAR ${tax.toFixed(2)}`;
+        totalValue.textContent = `QAR ${total.toFixed(2)}`;
+      }
+
+      function generateReceipt() {
+        let subtotal = 0;
+        cart.forEach(item => subtotal += item.price * item.quantity);
+        const tax = subtotal * 0.05;
+        const total = subtotal + tax;
+
+        const now = new Date();
+        const date = now.toLocaleDateString();
+        const time = now.toLocaleTimeString();
+
+        let receipt = `Foreveryours Flowers\n`;
+        receipt += `----------------------------------------\n`;
+        receipt += `Bill #: ${billNumber}\n`;
+        receipt += `Date: ${date}\n`;
+        receipt += `Time: ${time}\n`;
+        receipt += `----------------------------------------\n`;
+        receipt += `Items:\n`;
+        cart.forEach(item => {
+          receipt += `${item.name} (x${item.quantity})\n`;
+          receipt += `  QAR ${item.price.toFixed(2)} x ${item.quantity} = QAR ${(item.price * item.quantity).toFixed(2)}\n`;
+        });
+        receipt += `----------------------------------------\n`;
+        receipt += `Subtotal: QAR ${subtotal.toFixed(2)}\n`;
+        receipt += `Tax (5%): QAR ${tax.toFixed(2)}\n`;
+        receipt += `Total: QAR ${total.toFixed(2)}\n`;
+        receipt += `----------------------------------------\n`;
+        receipt += `Thank you for your purchase!\n`;
+
+        return receipt;
+      }
+
+      function showReceipt() {
+        const receiptContent = document.getElementById('receiptContent');
+        receiptContent.textContent = generateReceipt();
+        const modal = new bootstrap.Modal(document.getElementById('receiptModal'));
+        modal.show();
+      }
+
+      function downloadReceipt() {
+        const receipt = generateReceipt();
+        const blob = new Blob([receipt], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `receipt_${billNumber}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function proceedTransaction() {
+        if (cart.length === 0) {
+          alert('Cart is empty!');
+          return;
+        }
+        billNumber++;
+        showReceipt();
+        cart = [];
+        updateReceipt();
+      }
+    </script>
+</body>
+</html>
