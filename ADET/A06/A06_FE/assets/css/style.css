@@ -1,0 +1,550 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e6ecf2;
+    color: #4a4a4a;
+    margin: 0;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    background-color: #e6ecf2;
+    margin-bottom: 20px;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    max-height: 50px;
+    max-width: 100px;
+    height: auto;
+  }
+
+  .logo img:hover {
+    transform: scale(1.05);
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-left: 10px;
+    background: linear-gradient(90deg, #ff4500, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .search-container {
+    position: relative;
+    margin-left: 1.5rem;
+    flex-grow: 1;
+    max-width: 450px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8c8c8c;
+  }
+
+  .search-bar {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 3rem;
+    border-radius: 30px;
+    border: 1px solid #e0dede;
+    font-size: 0.95rem;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .search-bar:focus {
+    outline: none;
+    border-color: #fcbf79;
+    box-shadow: 0 0 8px rgba(255, 153, 153, 0.3);
+  }
+
+  .date {
+    font-size: 0.95rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+
+  .content-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .categories-section {
+    flex: 2;
+    min-width: 60%;
+    max-width: 65%;
+    order: 1;
+  }
+
+  .categories {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #fcbf79 #f0e6e6;
+  }
+
+  .categories::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .categories::-webkit-scrollbar-thumb {
+    background-color: #fcbf79;
+    border-radius: 10px;
+  }
+
+  .categories::-webkit-scrollbar-track {
+    background-color: #f0e6e6;
+  }
+
+  .category-btn {
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 15px;
+    background-color: #fcbf79;
+    color: #ffffff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .category-btn:hover,
+  .category-btn.active {
+    background-color: #ff9752;
+    transform: translateY(-2px);
+  }
+
+  .maincontainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-height: 600px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .maincontainer::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .maincontainer::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+
+  .maincontainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    border-bottom: 1px solid #f0e6e6;
+  }
+
+  .product-card .card-body {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .product-card .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #4a4a4a;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card .card-text {
+    font-size: 0.95rem;
+    color: #fcbf79;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .product-card .btn-add {
+    background-color: #c4e4c4;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .product-card .btn-add:hover {
+    background-color: #a8d5a8;
+    transform: translateY(-2px);
+  }
+
+  .product-card .quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .quantity-control button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: #fcbf79;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .quantity-control button:hover {
+    background-color: #ff9752;
+  }
+
+  .quantity-control span {
+    width: 30px;
+    text-align: center;
+    color: #4a4a4a;
+  }
+
+  .receipt-section {
+    flex: 1;
+    min-width: 160px;
+    max-width: 35%;
+    order: 2;
+    position: sticky;
+    top: 20px;
+  }
+
+  .receipt {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .receipt::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .receipt::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+
+  .receipt::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .receipt h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #4a4a4a;
+    margin-bottom: 1.5rem;
+  }
+
+  .receipt-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .receipt-item span:first-child {
+    color: #6c757d;
+    flex: 1;
+  }
+
+  .receipt-item span:nth-child(2) {
+    font-weight: 500;
+    color: #4a4a4a;
+    margin-right: 1rem;
+  }
+
+  .receipt-item .quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .receipt-item b {
+    color: #fcbf79;
+    font-weight: 600;
+  }
+
+  .payment-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .payment-buttons button {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #c4e4c4;
+    color: #4a4a4a;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .payment-buttons button:hover,
+  .payment-buttons button.active {
+    background-color: #a8d5a8;
+    transform: translateY(-2px);
+  }
+
+  .proceed-transaction {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #fcbf79;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .proceed-transaction:hover {
+    background-color: #ff9752;
+    transform: translateY(-2px);
+  }
+
+  .modal-content pre {
+    white-space: pre-wrap;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+  }
+
+  .receipt-modal .modal-dialog {
+    max-width: 400px;
+  }
+
+  @media (max-width: 768px) {
+    .content-container {
+      padding: 1rem;
+      gap: 10px;
+    }
+
+    .categories-section {
+      min-width: 60%;
+      max-width: 65%;
+    }
+
+    .receipt-section {
+      min-width: 160px;
+      max-width: 35%;
+    }
+
+    .maincontainer {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .receipt {
+      max-height: 400px;
+      padding: 1rem;
+    }
+
+    .receipt h5 {
+      font-size: 1.2rem;
+    }
+
+    .receipt-item {
+      font-size: 0.85rem;
+    }
+
+    .receipt-item .quantity-control button {
+      width: 25px;
+      height: 25px;
+      font-size: 0.9rem;
+    }
+
+    .receipt-item .quantity-control span {
+      width: 25px;
+    }
+
+    .proceed-transaction {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+    }
+
+    .search-container {
+      margin-left: 0;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .date {
+      margin-top: 0.5rem;
+    }
+
+    .product-card img {
+      height: 140px;
+    }
+
+    .product-card .card-title {
+      font-size: 1rem;
+    }
+
+    .product-card .card-text {
+      font-size: 0.85rem;
+    }
+
+    .product-card .btn-add {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .product-card .quantity-control button {
+      width: 25px;
+      height: 25px;
+      font-size: 0.9rem;
+    }
+
+    .product-card .quantity-control span {
+      width: 25px;
+    }
+
+    .categories-section {
+      min-width: 60%;
+      max-width: 65%;
+    }
+
+    .receipt-section {
+      min-width: 160px;
+      max-width: 35%;
+    }
+
+    .receipt {
+      max-height: 350px;
+      padding: 0.75rem;
+    }
+
+    .receipt h5 {
+      font-size: 1.1rem;
+    }
+
+    .receipt-item {
+      font-size: 0.8rem;
+    }
+
+    .receipt-item .quantity-control button {
+      width: 22px;
+      height: 22px;
+      font-size: 0.8rem;
+    }
+
+    .receipt-item .quantity-control span {
+      width: 22px;
+    }
+
+    .proceed-transaction {
+      padding: 0.6rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 414px) {
+    .content-container {
+      padding: 0.5rem;
+      gap: 5px;
+    }
+
+    .categories-section {
+      min-width: 60%;
+      max-width: 65%;
+    }
+
+    .receipt-section {
+      min-width: 100px;
+      max-width: 35%;
+    }
+
+    .maincontainer {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      padding: 0.75rem;
+    }
+
+    .receipt {
+      padding: 0.75rem;
+      max-height: 100%;
+    }
+
+    .receipt h5 {
+      font-size: 1.1rem;
+    }
+
+    .receipt-item {
+      font-size: 0.8rem;
+    }
+
+    .receipt-item .quantity-control button {
+      width: 22px;
+      height: 22px;
+      font-size: 0.8rem;
+    }
+
+    .receipt-item .quantity-control span {
+      width: 22px;
+    }
+
+    .proceed-transaction {
+      padding: 0.6rem;
+      font-size: 0.85rem;
+    }
+  }
